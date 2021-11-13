@@ -1,0 +1,50 @@
+# Logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# Output of 'npm pack'
+*.tgz
+
+# dotenv environment variables file
+.env
+
+# OS X temporary files
+.DS_Store
+
+# IDE
+.idea
+.vscode
+
+# don't check in build files
+/temp/
+
+# Ignore source on NPM
+/src/
+
+# Ignore banchmarks
+/benchmarks/
+
+# Ignore Tests
+/tests/
+
+# Ignore Docs
+/docs/
+
+# Ignore Examples
+/examples/
+
+# Ignore Git hooks
+/git-hooks/
+
+# Config files
+.babelrc
+.gitignore
+jest.config.js
+rollup.config.js
+tsconfig.json
