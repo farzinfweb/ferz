@@ -20,10 +20,18 @@ export class DateTimeFormatter {
 
     valueOfToken(token: string, dt: DateTime) {
         switch (token) {
+            case 'y':
+                return dt.year.toString();
             case 'yy':
                 return dt.year.toString().slice(-2);
+            case 'yyyy':
+                return dt.year.toString().padStart(4, "0");
+            case 'M':
+                return dt.month.toString();
             case 'MM':
                 return dt.month.toString().padStart(2, "0");
+            case 'd':
+                return dt.day.toString();
             case 'dd':
                 return dt.day.toString().padStart(2, "0");
             default:
