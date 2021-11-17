@@ -2,6 +2,7 @@ import Calendar from "./Calendar";
 import type { Calendarable } from "./Calendarable";
 import { EmptyCalendar } from './Calendarable';
 import { DateConverter } from "./DateConverter"
+import { DateTimeComponents } from "./DateTimeComponents";
 import { DateTimeFormatter } from "./DateTimeFormatter";
 
 let defaultCalendar = new EmptyCalendar;
@@ -9,27 +10,24 @@ let defaultCalendar = new EmptyCalendar;
 export class DateTime {
     protected _date: Date;
     protected _calendar: Calendarable;
-    private _year: number;
-    private _month: number;
     private _jd: number;
-    
-    protected _day: number;
-    protected _hour: number;
-    protected _minute: number;
-    protected _second: number;
+    protected _components: DateTimeComponents;
 
     public static Calendar = Calendar;
 
-    constructor(config: {year?: number, month?: number, day?: number, hour?: number, minute?: number, second?: number}, calendar?: Calendarable) {
-        this._date = new Date();
-        this._year = config.year ?? this._date.getFullYear();
-        this._month = config.month ?? this._date.getMonth() + 1;
-        this._day = config.day ?? this._date.getDate();
-        this._hour = config.hour ?? this._date.getHours();
-        this._minute = config.minute ?? this._date.getMinutes();
-        this._second = config.second ?? this._date.getSeconds();
+    constructor(components?: DateTimeComponents|null, calendar?: Calendarable) {
+        if (components) {
+            this._components = components;
+        } else {
+            this._date = new Date();
+            this._components = DateTimeComponents.fromJSDate(this._date);
+        }
         this._calendar = calendar ?? this.useDefaultCalendar();
-        this._jd = this._calendar.toJd(this);
+        this._jd = this._calendar.toJd(this._components);
+    }
+
+    static fromObj(config: {year: number, month: number, day: number, hour?: number, minute?: number, second?: number}, calendar?: Calendarable): DateTime {
+        return new DateTime(DateTimeComponents.fromObj(config), calendar);
     }
 
     useDefaultCalendar(): Calendarable {
@@ -41,7 +39,7 @@ export class DateTime {
     }
 
     static now() {
-        return new DateTime({});
+        return new DateTime();
     }
 
     equals(date: DateTime): boolean {
@@ -54,12 +52,12 @@ export class DateTime {
             month: this.month,
             day: this.day,
         };
-        return new DateTime({ ...current, ...alts }, this.calendar);
+        return DateTime.fromObj({ ...current, ...alts }, this.calendar);
     }
 
     public toCalendar(calendar: Calendarable): DateTime {
         const converter = new DateConverter(this);
-        return converter.convert(calendar);
+        return new DateTime(converter.convert(calendar), calendar);
     }
 
     get calendar(): Calendarable {
@@ -71,22 +69,22 @@ export class DateTime {
     }
 
     get year(): number {
-        return this._year;
+        return this._components.year;
     }
     get month(): number {
-        return this._month;
+        return this._components.month;
     }
     get day(): number {
-        return this._day;
+        return this._components.day;
     }
     get hour(): number {
-        return this._hour;
+        return this._components.hour;
     }
     get minute(): number {
-        return this._minute;
+        return this._components.minute;
     }
     get second(): number {
-        return this._second;
+        return this._components.second;
     }
     setDay(value: number) {
         return this.duplicate({ day: value });
@@ -115,7 +113,7 @@ export class DateTime {
     }
 
     get daysInMonth(): number {
-        return this._calendar.daysInMonth(this._year, this._month);
+        return this._calendar.daysInMonth(this.year, this.month);
     }
 
     get weekday(): number {

@@ -1,11 +1,11 @@
-import type { DateTime } from "./DateTime";
+import { DateTimeComponents } from "./DateTimeComponents";
 
 export interface Calendarable {
     name: string;
 
-    toJd(date: DateTime): number;
+    toJd(date: DateTimeComponents): number;
 
-    fromJd(jd: number): DateTime;
+    fromJd(jd: number): DateTimeComponents;
 
     isLeap(year: number): boolean;
 
@@ -14,10 +14,10 @@ export interface Calendarable {
 
 export class EmptyCalendar implements Calendarable {
     name: string = 'empty';
-    toJd(date: DateTime): number {
+    toJd(date: DateTimeComponents): number {
         throw new Error("Method not implemented.");
     }
-    fromJd(jd: number): DateTime {
+    fromJd(jd: number): DateTimeComponents {
         throw new Error("Method not implemented.");
     }
     isLeap(year: number): boolean {

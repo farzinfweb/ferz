@@ -1,11 +1,11 @@
 import type { Calendarable } from "./Calendarable";
-import { DateTime } from "./DateTime";
+import { DateTimeComponents } from "./DateTimeComponents";
 
 export class PersianCalendar implements Calendarable {
     public name: string = 'persian';
     static PERSIAN_EPOCH = 1948320.5;
 
-    toJd(date: DateTime): number {
+    toJd(date: DateTimeComponents): number {
         var epbase, epyear;
 
         epbase = date.year - ((date.year >= 0) ? 474 : 473);
@@ -22,11 +22,11 @@ export class PersianCalendar implements Calendarable {
                 (PersianCalendar.PERSIAN_EPOCH - 1);
     }
 
-    fromJd(jd: number): DateTime {
+    fromJd(jd: number): DateTimeComponents {
         var year, month, day, depoch, cycle, cyear, ycycle,
         aux1, aux2, yday;
         jd = Math.floor(jd) + 0.5;
-        depoch = jd - this.toJd(new DateTime({ year: 475, month: 1, day: 1 }));
+        depoch = jd - this.toJd(DateTimeComponents.fromObj({ year: 475, month: 1, day: 1 }));
         cycle = Math.floor(depoch / 1029983);
         cyear = depoch % 1029983;
         if (cyear == 1029982) {
@@ -41,10 +41,10 @@ export class PersianCalendar implements Calendarable {
         if (year <= 0) {
             year--;
         }
-        yday = (jd - this.toJd(new DateTime({ year, month: 1, day: 1 }))) + 1;
+        yday = (jd - this.toJd(DateTimeComponents.fromObj({ year, month: 1, day: 1 }))) + 1;
         month = (yday <= 186) ? Math.ceil(yday / 31) : Math.ceil((yday - 6) / 30);
-        day = (jd - this.toJd(new DateTime({ year, month, day: 1 }))) + 1;
-        return new DateTime({year, month, day}, new PersianCalendar);
+        day = (jd - this.toJd(DateTimeComponents.fromObj({ year, month, day: 1 }))) + 1;
+        return DateTimeComponents.fromObj({year, month, day});
     }
 
     isLeap(year: number): boolean {

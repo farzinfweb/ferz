@@ -1,11 +1,11 @@
 import type { Calendarable } from "./Calendarable";
-import { DateTime } from "./DateTime";
+import { DateTimeComponents } from "./DateTimeComponents";
 
 export class GregorianCalendar implements Calendarable {
     public name: string = 'gregorian';
     static GREGORIAN_EPOCH = 1721425.5;
 
-    toJd(date: DateTime): number {
+    toJd(date: DateTimeComponents): number {
         const GREGORIAN_EPOCH = 1721425.5;
         return (GREGORIAN_EPOCH - 1) +
            (365 * (date.year - 1)) +
@@ -19,7 +19,7 @@ export class GregorianCalendar implements Calendarable {
            date.day);
     }
 
-    fromJd(jd: number): DateTime {
+    fromJd(jd: number): DateTimeComponents {
         var wjd, depoch, quadricent, dqc, cent, dcent, quad, dquad,
         yindex, dyindex, year, yearday, leapadj, month, day;
 
@@ -36,14 +36,14 @@ export class GregorianCalendar implements Calendarable {
         if (!((cent == 4) || (yindex == 4))) {
             year++;
         }
-        yearday = wjd - this.toJd(new DateTime({year, month: 1, day: 1}));
-        leapadj = ((wjd < this.toJd(new DateTime({year, month: 3, day: 1}))) ? 0
+        yearday = wjd - this.toJd(DateTimeComponents.fromObj({year, month: 1, day: 1}));
+        leapadj = ((wjd < this.toJd(DateTimeComponents.fromObj({year, month: 3, day: 1}))) ? 0
                                                     :
                     (this.isLeap(year) ? 1 : 2)
                 );
         month = Math.floor((((yearday + leapadj) * 12) + 373) / 367);
-        day = (wjd - this.toJd(new DateTime({year, month, day: 1}))) + 1;
-        return new DateTime({year, month, day});
+        day = (wjd - this.toJd(DateTimeComponents.fromObj({year, month, day: 1}))) + 1;
+        return DateTimeComponents.fromObj({year, month, day});
     }
 
     isLeap(year: number): boolean {

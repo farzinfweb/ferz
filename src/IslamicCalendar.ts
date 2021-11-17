@@ -1,18 +1,18 @@
 import type { Calendarable } from "./Calendarable";
-import { DateTime } from "./DateTime";
+import { DateTimeComponents } from "./DateTimeComponents";
 
 export class IslamicCalendar implements Calendarable {
     public name: string = 'islamic';
     static ISLAMIC_EPOCH = 1948439.5;
     
-    toJd(date: DateTime): number {
+    toJd(date: DateTimeComponents): number {
         return (date.day +
             Math.ceil(29.5 * (date.month - 1)) +
             (date.year - 1) * 354 +
             Math.floor((3 + (11 * date.year)) / 30) +
             IslamicCalendar.ISLAMIC_EPOCH) - 1;
     }
-    fromJd(jd: number): DateTime {
+    fromJd(jd: number): DateTimeComponents {
         var year, month, day;
         jd = Math.floor(jd) + 0.5;
         year = Math.floor(((30 * (jd - IslamicCalendar.ISLAMIC_EPOCH)) + 10646) / 10631);
@@ -35,7 +35,7 @@ export class IslamicCalendar implements Calendarable {
                     break;
                 }
             }
-            let x = (jd - this.toJd(new DateTime({year, month: 1, day: 1}))) + 1;
+            let x = (jd - this.toJd(DateTimeComponents.fromObj({year, month: 1, day: 1}))) + 1;
             var sum = 0;
             var i=0;
             while (i<12) {
@@ -49,10 +49,10 @@ export class IslamicCalendar implements Calendarable {
             day = x - sum;
             month = i + 1;
         } else {
-            month = Math.min(12, Math.ceil((jd - (29 + this.toJd(new DateTime({year, month: 1, day: 1})))) / 29.5) + 1);
-            day = (jd - this.toJd(new DateTime({year, month, day: 1}))) + 1;
+            month = Math.min(12, Math.ceil((jd - (29 + this.toJd(DateTimeComponents.fromObj({year, month: 1, day: 1})))) / 29.5) + 1);
+            day = (jd - this.toJd(DateTimeComponents.fromObj({year, month, day: 1}))) + 1;
         }
-        return new DateTime({year, month, day}, new IslamicCalendar);
+        return DateTimeComponents.fromObj({year, month, day});
     }
     isLeap(year: number): boolean {
         return (((year * 11) + 14) % 30) < 11;
