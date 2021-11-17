@@ -1,4 +1,4 @@
-import Calendar from "./Calendar";
+import { Calendar } from "./Calendar";
 import type { Calendarable } from "./Calendarable";
 import { EmptyCalendar } from './Calendarable';
 import { DateConverter } from "./DateConverter"
@@ -13,20 +13,19 @@ export class DateTime {
     private _jd: number;
     protected _components: DateTimeComponents;
 
-    public static Calendar = Calendar;
-
-    constructor(components?: DateTimeComponents|null, calendar?: Calendarable) {
+    constructor(components?: DateTimeComponents|null, calendar?: Calendarable|string) {
         if (components) {
             this._components = components;
         } else {
             this._date = new Date();
             this._components = DateTimeComponents.fromJSDate(this._date);
         }
+        if (typeof(calendar) === 'string') calendar = Calendar.fromName(calendar);
         this._calendar = calendar ?? this.useDefaultCalendar();
         this._jd = this._calendar.toJd(this._components);
     }
 
-    static fromObj(config: {year: number, month: number, day: number, hour?: number, minute?: number, second?: number}, calendar?: Calendarable): DateTime {
+    static fromObj(config: {year?: number, month?: number, day?: number, hour?: number, minute?: number, second?: number}, calendar?: Calendarable): DateTime {
         return new DateTime(DateTimeComponents.fromObj(config), calendar);
     }
 

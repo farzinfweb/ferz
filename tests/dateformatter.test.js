@@ -19,17 +19,17 @@ describe('DateTimeFormatter', () => {
 
 	it('should support two month tokens', () => {
 		const formatter = new DateTimeFormatter;
-        expect(formatter.stringify(new DateTime({year: 2021, month: 4, day: 8}), 'M MM')).toEqual('4 04');
+        expect(formatter.stringify(DateTime.fromObj({year: 2021, month: 4, day: 8}), 'M MM')).toEqual('4 04');
 	});
 
 	it('should support two day tokens', () => {
 		const formatter = new DateTimeFormatter;
-        expect(formatter.stringify(new DateTime({year: 2021, month: 4, day: 8}), 'd dd')).toEqual('8 08');
+        expect(formatter.stringify(DateTime.fromObj({year: 2021, month: 4, day: 8}), 'd dd')).toEqual('8 08');
 	});
 
 	it('should support four tokens for hour', () => {
 		const formatter = new DateTimeFormatter;
-		const time = new DateTime({hour: 16, minute: 9, second: 26});
+		const time = DateTime.fromObj({hour: 16, minute: 9, second: 26});
         expect(formatter.stringify(time, 'h hh')).toEqual('4 04');
 		expect(formatter.stringify(time, 'H HH')).toEqual('16 16');
 	});
