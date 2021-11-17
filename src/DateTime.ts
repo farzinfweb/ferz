@@ -14,14 +14,20 @@ export class DateTime {
     private _jd: number;
     
     protected _day: number;
+    protected _hour: number;
+    protected _minute: number;
+    protected _second: number;
 
     public static Calendar = Calendar;
 
-    constructor(config: {year?: number, month?: number, day?: number}, calendar?: Calendarable) {
+    constructor(config: {year?: number, month?: number, day?: number, hour?: number, minute?: number, second?: number}, calendar?: Calendarable) {
         this._date = new Date();
         this._year = config.year ?? this._date.getFullYear();
         this._month = config.month ?? this._date.getMonth() + 1;
         this._day = config.day ?? this._date.getDate();
+        this._hour = config.hour ?? this._date.getHours();
+        this._minute = config.minute ?? this._date.getMinutes();
+        this._second = config.second ?? this._date.getSeconds();
         this._calendar = calendar ?? this.useDefaultCalendar();
         this._jd = this._calendar.toJd(this);
     }
@@ -72,6 +78,15 @@ export class DateTime {
     }
     get day(): number {
         return this._day;
+    }
+    get hour(): number {
+        return this._hour;
+    }
+    get minute(): number {
+        return this._minute;
+    }
+    get second(): number {
+        return this._second;
     }
     setDay(value: number) {
         return this.duplicate({ day: value });

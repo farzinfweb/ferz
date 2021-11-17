@@ -34,6 +34,22 @@ export class DateTimeFormatter {
                 return dt.day.toString();
             case 'dd':
                 return dt.day.toString().padStart(2, "0");
+            case 'h':
+                return dt.hour === 12 ? (12).toString() : (dt.hour % 12).toString();
+            case 'hh':
+                return dt.hour === 12 ? (12).toString() : (dt.hour % 12).toString().padStart(2, "0");
+            case 'H':
+                return dt.hour.toString();
+            case 'HH':
+                return dt.hour.toString().padStart(2, "0");
+            case 'm':
+                return dt.minute.toString();
+            case 'mm':
+                return dt.minute.toString().padStart(2, "0");
+            case 's':
+                return dt.second.toString();
+            case 'ss':
+                return dt.second.toString().padStart(2, "0");
             default:
                 return token;
         }
