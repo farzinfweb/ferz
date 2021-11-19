@@ -19,6 +19,15 @@ export class DateTimeComponents {
         return new DateTimeComponents(components);
     }
 
+    static fromArray(data: (number|string)[]) {
+        const structure = ['year', 'month', 'day', 'hour', 'minute', 'second'];
+        let obj = {};
+        data.forEach((v, i) => {
+            obj[structure[i]] = typeof(v) === 'string' && !isNaN(parseInt(v)) ? parseInt(v) : v;
+        });
+        return new DateTimeComponents(obj);
+    }
+
     static fromJSDate(date: Date): DateTimeComponents { 
         return new DateTimeComponents({
             year: date.getFullYear(),
