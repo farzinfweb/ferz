@@ -1,9 +1,11 @@
+import { GregorianCalendar } from "./GregorianCalendar";
 import { Calendar } from "./Calendar";
 import type { Calendarable } from "./Calendarable";
 import { EmptyCalendar } from './Calendarable';
 import { DateConverter } from "./DateConverter"
 import { DateTimeComponents } from "./DateTimeComponents";
 import { DateTimeFormatter } from "./DateTimeFormatter";
+import { DateTimeParser } from "./DateTimeParser";
 
 let defaultCalendar = new EmptyCalendar;
 
@@ -14,19 +16,33 @@ export class DateTime {
     protected _components: DateTimeComponents;
 
     constructor(components?: DateTimeComponents|null, calendar?: Calendarable|string) {
+        if (typeof(calendar) === 'string') calendar = Calendar.fromName(calendar);
+        this._calendar = calendar ?? this.useDefaultCalendar();
         if (components) {
             this._components = components;
         } else {
-            this._date = new Date();
-            this._components = DateTimeComponents.fromJSDate(this._date);
+            const now = new Date();
+            const components = DateTimeComponents.fromJSDate(now);
+            if (this.calendarName == 'gregorian') {
+                this._date = now;
+                this._components = components;
+            } else {
+                this._components = this._calendar.fromJd((new GregorianCalendar).toJd(components));
+            }
         }
-        if (typeof(calendar) === 'string') calendar = Calendar.fromName(calendar);
-        this._calendar = calendar ?? this.useDefaultCalendar();
         this._jd = this._calendar.toJd(this._components);
     }
 
     static fromObj(config: {year?: number, month?: number, day?: number, hour?: number, minute?: number, second?: number}, calendar?: Calendarable): DateTime {
         return new DateTime(DateTimeComponents.fromObj(config), calendar);
+    }
+
+    static fromISO(iso: string, calendar?: Calendarable|string): DateTime {
+        return new DateTime((new DateTimeParser).fromISO(iso), calendar);
+    }
+
+    toISO(): string {
+        return this.stringifyWith('yyyy-MM-ddTHH:mm:ss');
     }
 
     useDefaultCalendar(): Calendarable {
@@ -37,8 +53,8 @@ export class DateTime {
         defaultCalendar = calendar;
     }
 
-    static now() {
-        return new DateTime();
+    static now(calendar: Calendarable|string) {
+        return new DateTime(null, calendar);
     }
 
     equals(date: DateTime): boolean {

@@ -1,5 +1,7 @@
 import { DateTime } from '../src/DateTime';
+import { GregorianCalendar } from '../src/GregorianCalendar';
 import { PersianCalendar } from '../src/PersianCalendar';
+import { DateTimeComponents } from '../src/DateTimeComponents';
 
 describe('DateTime', () => {
 	it('should set the calendar passed', () => {
@@ -24,5 +26,27 @@ describe('DateTime', () => {
 
 	it('should also accept calendar names as string', () => {
 		expect(new DateTime(null, 'persian').calendar.name).toBe('persian');
-	})
+	});
+
+	it('should format dates to iso when asked', () => {
+		const date = DateTime.fromISO('2017-09-04T19:24:15'); 
+		expect(date.toISO()).toBe('2017-09-04T19:24:15');
+	});
+
+	it('should call the datetimeparser correctly', () => {
+        const components = DateTime.fromISO('2017-09-04T19:24:15');
+        expect([components.year, components.month, components.day]).toStrictEqual([2017, 9, 4]);
+        expect([components.hour, components.minute, components.second]).toStrictEqual([19, 24, 15]);
+	});
+
+	it('should respect the calendar when getting the current date', () => {
+		const persian = new PersianCalendar;
+		const now = DateTime.now('persian');
+		const components = persian.fromJd((new GregorianCalendar).toJd(DateTimeComponents.fromJSDate(new Date())));
+		expect([now.year, now.month, now.day]).toStrictEqual([components.year, components.month, components.day]);
+
+		const jsNow = new Date();
+		const now1 = DateTime.now('gregorian');
+		expect(now1.year).toBe(jsNow.getFullYear());
+	});
 });
