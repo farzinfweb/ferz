@@ -1,6 +1,9 @@
 import type { DateTime } from "./DateTime";
+import { DateTimeConfiguration } from "./DateTimeConfiguration";
 
 export class DateTimeFormatter {
+    _currentLocale: string;
+
     parse(format: string) {
         let chunks = [];
         let batch = "";
@@ -30,6 +33,12 @@ export class DateTimeFormatter {
                 return dt.month.toString();
             case 'MM':
                 return dt.month.toString().padStart(2, "0");
+            case 'MMM':
+                return this.monthNameToLocale(dt.month, 'short');
+            case 'MMMM':
+                return this.monthNameToLocale(dt.month, 'full');
+            case 'MMMMM':
+                return this.monthNameToLocale(dt.month, 'narrow');
             case 'd':
                 return dt.day.toString();
             case 'dd':
@@ -55,9 +64,22 @@ export class DateTimeFormatter {
         }
     }
 
-    stringify(dt: DateTime, format: string): string {
+    stringify(dt: DateTime, format: string, locale?: string): string {
+        this._currentLocale = locale + '-' + dt.calendarName;
         return this.parse(format).map(v => {
             return this.valueOfToken(v, dt);
         }).join('');
+    }
+
+    monthNameToLocale(month: number, length: string = 'full'): string {
+        const locale = DateTimeConfiguration.getLocale(this._currentLocale);
+        switch(length) {
+            case 'full':
+                return locale.monthNamesFull()[month - 1];
+            case 'short':
+                return locale.monthNamesShort()[month - 1];
+            case 'narrow':
+                return locale.monthNamesNarrow()[month - 1];
+        }
     }
 }
