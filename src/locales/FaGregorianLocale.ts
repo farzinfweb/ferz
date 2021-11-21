@@ -14,12 +14,12 @@ export class FaGregorianLocale implements Localeable {
         return 'ژ|ف|م|آ|مه|ژو|ژو|او|س|اک|ن|د'.split('|');
     }
     weekdaysFull(): string[] {
-        return 'یک\u200cشنبه|دوشنبه|سه\u200cشنبه|چهارشنبه|پنج\u200cشنبه|جمعه|شنبه'.split('|');
+        return 'دوشنبه|سه\u200cشنبه|چهارشنبه|پنج\u200cشنبه|جمعه|شنبه|یک\u200cشنبه'.split('|');
     }
     weekdaysShort(): string[] {
-        return 'یک|دو|سه|چهار|پنج|جمعه|شنبه'.split('|');
+        return 'دو|سه|چهار|پنج|جمعه|شنبه|یک'.split('|');
     }
     weekdaysNarrow(): string[] {
-        return 'ی|د|س|چ|پ|ج|ش'.split('|');
+        return 'د|س|چ|پ|ج|ش|ی'.split('|');
     }
 }

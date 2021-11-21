@@ -36,6 +36,13 @@ describe('DateTimeFormatter', () => {
         expect(formatter.stringify(DateTime.fromObj({year: 2021, month: 4, day: 8}), 'd dd')).toEqual('8 08');
 	});
 
+	it('should support four weekday tokens', () => {
+		DateTimeConfiguration.addLocaleSupport(new FaGregorianLocale);
+		const formatter = new DateTimeFormatter;
+		const date = DateTime.fromObj({year: 2021, month: 11, day: 22});
+        expect(formatter.stringify(date, 'E EE EEE EEEE EEEEE', 'fa')).toEqual('1 01 دو دوشنبه د');
+	});
+
 	it('should support four tokens for hour', () => {
 		const formatter = new DateTimeFormatter;
 		const time = DateTime.fromObj({hour: 16, minute: 9, second: 26});

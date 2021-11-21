@@ -43,6 +43,16 @@ export class DateTimeFormatter {
                 return dt.day.toString();
             case 'dd':
                 return dt.day.toString().padStart(2, "0");
+            case 'E':
+                return dt.weekday.toString();
+            case 'EE':
+                return dt.weekday.toString().padStart(2, "0");
+            case 'EEE':
+                return this.weekdayToLocale(dt.weekday, 'short');
+            case 'EEEE':
+                return this.weekdayToLocale(dt.weekday, 'full');
+            case 'EEEEE':
+                return this.weekdayToLocale(dt.weekday, 'narrow');
             case 'h':
                 return dt.hour === 12 ? (12).toString() : (dt.hour % 12).toString();
             case 'hh':
@@ -80,6 +90,18 @@ export class DateTimeFormatter {
                 return locale.monthNamesShort()[month - 1];
             case 'narrow':
                 return locale.monthNamesNarrow()[month - 1];
+        }
+    }
+
+    weekdayToLocale(weekday: number, length: string = 'full') {
+        const locale = DateTimeConfiguration.getLocale(this._currentLocale);
+        switch(length) {
+            case 'full':
+                return locale.weekdaysFull()[weekday - 1];
+            case 'short':
+                return locale.weekdaysShort()[weekday - 1];
+            case 'narrow':
+                return locale.weekdaysNarrow()[weekday - 1];
         }
     }
 }

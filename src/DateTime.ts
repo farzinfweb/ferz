@@ -138,7 +138,7 @@ export class DateTime {
     }
 
     get weekday(): number {
-        return Math.floor((Math.ceil(this._jd) + 2) % 7) + 1;
+        return Math.floor((Math.ceil(this._jd)) % 7) + 1;
     }
 
     startOf(unit: String): DateTime {
