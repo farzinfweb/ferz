@@ -7,4 +7,11 @@ describe('DateTimeParser', () => {
         expect([components.year, components.month, components.day]).toStrictEqual([2017, 9, 4]);
         expect([components.hour, components.minute, components.second]).toStrictEqual([19, 24, 15]);
     });
+
+    it('should set components not present to zero', () => {
+        const parser = new DateTimeParser;
+        const components = parser.fromISO('2017-09-04');
+        expect([components.year, components.month, components.day]).toStrictEqual([2017, 9, 4]);
+        expect([components.hour, components.minute, components.second]).toStrictEqual([0, 0, 0]);
+    });
 });

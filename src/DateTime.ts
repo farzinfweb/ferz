@@ -62,10 +62,16 @@ export class DateTime {
     }
 
     duplicate(alts: object) {
+        if (alts instanceof DateTimeComponents) {
+            return new DateTime(alts, this.calendar);
+        }
         const current = {
             year: this.year,
             month: this.month,
             day: this.day,
+            hour: this.hour,
+            minute: this.minute,
+            second: this.second,
         };
         return DateTime.fromObj({ ...current, ...alts }, this.calendar);
     }
@@ -120,11 +126,11 @@ export class DateTime {
     }
 
     addDays(days: number): DateTime {
-        return this.duplicate({ day: this.day + days });
+        return this.duplicate(this.calendar.fromJd(this._jd + days));
     }
 
     subtractDays(days: number): DateTime {
-        return this.duplicate({ day: this.day - days });
+        return this.duplicate(this.calendar.fromJd(this._jd - days));
     }
 
     get daysInMonth(): number {

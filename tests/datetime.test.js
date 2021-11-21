@@ -49,4 +49,14 @@ describe('DateTime', () => {
 		const now1 = DateTime.now('gregorian');
 		expect(now1.year).toBe(jsNow.getFullYear());
 	});
+
+	it('should subtract days correctly', () => {
+		const date = DateTime.fromISO('2020-12-05');
+		expect(date.subtractDays(7).stringifyWith('yyyy-MM-dd')).toBe('2020-11-28');
+	});
+
+	it('should add days correctly', () => {
+		const date = DateTime.fromISO('2020-12-26', 'gregorian');
+		expect(date.addDays(7).stringifyWith('yyyy-MM-dd')).toBe('2021-01-02');
+	});
 });

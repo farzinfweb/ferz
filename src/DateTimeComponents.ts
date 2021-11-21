@@ -7,12 +7,12 @@ export class DateTimeComponents {
     private _second: number = null;
 
     constructor(components: {year?: number, month?: number, day?: number, hour?: number, minute?: number, second?: number}) {
-        this._year = components.year ?? null;
-        this._month = components.month ?? null;
-        this._day = components.day ?? null;
-        this._hour = components.hour ?? null;
-        this._minute = components.minute ?? null;
-        this._second = components.second ?? null;
+        this._year = components.year ?? 0;
+        this._month = components.month ?? 0;
+        this._day = components.day ?? 0;
+        this._hour = components.hour ?? 0;
+        this._minute = components.minute ?? 0;
+        this._second = components.second ?? 0;
     }
 
     static fromObj(components: {year?: number, month?: number, day?: number, hour?: number, minute?: number, second?: number}): DateTimeComponents {
@@ -23,7 +23,8 @@ export class DateTimeComponents {
         const structure = ['year', 'month', 'day', 'hour', 'minute', 'second'];
         let obj = {};
         data.forEach((v, i) => {
-            obj[structure[i]] = typeof(v) === 'string' && !isNaN(parseInt(v)) ? parseInt(v) : v;
+            const parsed = typeof(v) === 'string' && !isNaN(parseInt(v)) ? parseInt(v) : v;
+            obj[structure[i]] = parsed == null ? 0 : parsed;
         });
         return new DateTimeComponents(obj);
     }
