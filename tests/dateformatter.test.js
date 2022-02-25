@@ -17,7 +17,7 @@ describe('DateTimeFormatter', () => {
 
 	it('should support three year tokens', () => {
 		const formatter = new DateTimeFormatter;
-        expect(formatter.stringify(DateTime.now(), 'y yy yyyy')).toEqual('2021 21 2021');
+        expect(formatter.stringify(DateTime.now(), 'y yy yyyy')).toEqual('2022 22 2022');
 	});
 
 	it('should support five month tokens', () => {
