@@ -2,25 +2,14 @@
 
 > Ferz is a library for working with dates, times and 10 different calendars in JavaScript.
 
-## Prerequisites
-
-This project requires NodeJS (version 12 or later) and NPM.
-[Node](http://nodejs.org/) and [NPM](https://npmjs.org/) are really easy to install.
-
 ## Table of contents
 
 - [Ferz](#ferz)
-  - [Prerequisites](#prerequisites)
   - [Table of contents](#table-of-contents)
-  - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Authors](#authors)
   - [License](#license)
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ## Installation
 
@@ -39,7 +28,21 @@ $ yarn add --dev ferz
 ```
 
 ## Usage
-TODO
+To get the current date, you can use the **now** as below:
+```
+DateTime.now()
+```
+to get the date in a specific calendar, you can pass it as an argument
+```
+DateTime.now('persian')
+``` 
+
+To format the date, call **stringifyWith** with the format you need, for example:
+```
+DateTime.now().stringifyWith('yyyy-MM-dd')
+```
+will give you 2022-02-02
+
 
 ## Authors
 
