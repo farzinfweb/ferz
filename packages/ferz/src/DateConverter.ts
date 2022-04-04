@@ -3,13 +3,13 @@ import type { DateTime } from "./DateTime";
 import { DateTimeComponents } from "./DateTimeComponents";
 
 export class DateConverter {
-    protected _date: DateTime;
+  protected _date: DateTime;
 
-    constructor(from: DateTime) {
-        this._date = from;
-    }
+  constructor(from: DateTime) {
+    this._date = from;
+  }
 
-    public convert(calendar: Calendarable): DateTimeComponents {
-        return calendar.fromJd(this._date.jd);
-    }
+  public convert(calendar: Calendarable): DateTimeComponents {
+    return calendar.fromJd(this._date.jd);
+  }
 }

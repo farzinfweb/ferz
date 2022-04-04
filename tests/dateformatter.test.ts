@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeAll } from "vitest";
-import { DateTime } from "../src/DateTime";
-import { DateTimeConfiguration } from "../src/DateTimeConfiguration";
-import { DateTimeFormatter } from "../src/DateTimeFormatter";
-import { GregorianCalendar } from "../src/GregorianCalendar";
-import { FaGregorianLocale } from "../src/locales/FaGregorianLocale";
-import { FaPersianLocale } from "../src/locales/FaPersianLocale";
+import { DateTime } from "ferz";
+import { DateTimeConfiguration } from "ferz";
+import { DateTimeFormatter } from "ferz";
+import { GregorianCalendar } from "ferz";
+import { FaGregorianLocale } from "../packages/ferz/src/locales/FaGregorianLocale";
+import { FaPersianLocale } from "../packages/ferz/src/locales/FaPersianLocale";
 
 describe("DateTimeFormatter", () => {
   beforeAll(() => {

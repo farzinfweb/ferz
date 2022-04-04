@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { DateTimeParser } from "../src/DateTimeParser";
+import { DateTimeParser } from "ferz";
 
 describe("DateTimeParser", () => {
   it("should parse simple iso datetime strings", () => {

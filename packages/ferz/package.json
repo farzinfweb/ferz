@@ -1,0 +1,40 @@
+{
+  "name": "ferz",
+  "version": "0.0.3",
+  "description": "A library for working with dates and calendars in JS",
+  "keywords": [
+    "date",
+    "immutable",
+    "calendar"
+  ],
+  "homepage": "https://github.com/farzinfweb/ferz/tree/main/packages/ferz#readme",
+  "bugs": {
+    "url": "https://github.com/farzinfweb/ferz/issues"
+  },
+  "license": "MIT",
+  "author": "Farzin Far <farzin.farzanehnia@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farzinfweb/ferz.git",
+    "directory": "packages/ferz"
+  },
+  "funding": "https://github.com/sponsors/farzinfweb",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "unbuild",
+    "stub": "unbuild --stub"
+  }
+}

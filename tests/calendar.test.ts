@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { Calendar } from "../src/Calendar";
-import { PersianCalendar } from "../src/PersianCalendar";
-import { GregorianCalendar } from "../src/GregorianCalendar";
-import { IslamicCalendar } from "../src/IslamicCalendar";
+import { Calendar } from "ferz";
+import { PersianCalendar } from "ferz";
+import { GregorianCalendar } from "ferz";
+import { IslamicCalendar } from "ferz";
 
 describe("Calendar", () => {
   it("should return the corresponding calendar instance given the name", () => {

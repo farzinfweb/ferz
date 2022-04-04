@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 const r = (p: string) => resolve(__dirname, p);
 
 export const alias: AliasOptions = {
-  ferz: r("./packages/unocss/src/"),
+  ferz: r("./packages/ferz/src/"),
 };
 
 export default defineConfig({

@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { DateTime } from "../src/DateTime";
-import { GregorianCalendar } from "../src/GregorianCalendar";
-import { PersianCalendar } from "../src/PersianCalendar";
-import { DateTimeComponents } from "../src/DateTimeComponents";
+import { DateTime } from "ferz";
+import { GregorianCalendar } from "ferz";
+import { PersianCalendar } from "ferz";
+import { DateTimeComponents } from "ferz";
 
 describe("DateTime", () => {
   it("should set the calendar passed", () => {
