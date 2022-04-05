@@ -1,11 +1,11 @@
 {
   "name": "ferz-monorepo",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "packageManager": "pnpm@7.0.0",
   "scripts": {
     "test": "vitest",
-    "build": "rimraf packages/*/dist && pnpm -r run build && pnpm -r run build-post"
+    "build": "rimraf packages/*/dist && node scripts/copy-files.ts && pnpm -r run build && pnpm -r run build-post"
   },
   "devDependencies": {
     "rimraf": "^3.0.2",
