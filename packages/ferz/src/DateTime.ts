@@ -9,33 +9,39 @@ import { DateTimeParser } from "./DateTimeParser";
 
 let defaultCalendar = new EmptyCalendar();
 
+function tsFromComponents(c: DateTimeComponents): number {
+  return new Date(
+    c.year,
+    c.month - 1,
+    c.day,
+    c.hour,
+    c.minute,
+    c.second
+  ).valueOf();
+}
+
 export class DateTime {
-  protected _date: Date;
+  protected _ts: number;
   protected _calendar: Calendarable;
   private _jd: number;
   protected _components: DateTimeComponents;
 
   constructor(
-    components?: DateTimeComponents | null,
-    calendar?: Calendarable | string
+    components: DateTimeComponents,
+    calendar?: Calendarable | string,
+    jsDate?: Date
   ) {
     if (typeof calendar === "string") calendar = Calendar.fromName(calendar);
     this._calendar = calendar ?? this.useDefaultCalendar();
-    const now = new Date();
-    if (components) {
-      this._components = components;
-    } else {
-      const components = DateTimeComponents.fromJSDate(now);
-      if (this.calendarName == "gregorian") {
-        this._components = components;
-      } else {
-        this._components = this._calendar.fromJd(
-          new GregorianCalendar().toJd(components)
-        );
-      }
-    }
-    this._date = now;
+    this._components = components;
     this._jd = this._calendar.toJd(this._components);
+    this._ts = jsDate
+      ? jsDate.valueOf()
+      : tsFromComponents(
+          this.calendarName === "gregorian"
+            ? this._components
+            : new GregorianCalendar().fromJd(this._jd)
+        );
   }
 
   static fromObj(
@@ -68,12 +74,27 @@ export class DateTime {
     defaultCalendar = calendar;
   }
 
-  static now(calendar: Calendarable | string) {
-    return new DateTime(null, calendar);
+  static now(calendar?: Calendarable | string) {
+    if (typeof calendar === "string") calendar = Calendar.fromName(calendar);
+    calendar = calendar ?? defaultCalendar;
+    const now = new Date();
+    const gregorianComponents = DateTimeComponents.fromJSDate(now);
+    if (calendar.name === "gregorian") {
+      return new DateTime(gregorianComponents, calendar, now);
+    }
+    return new DateTime(
+      calendar.fromJd(new GregorianCalendar().toJd(gregorianComponents)),
+      calendar,
+      now
+    );
   }
 
   equals(date: DateTime): boolean {
     return this._jd === date.jd;
+  }
+
+  valueOf() {
+    return this._ts;
   }
 
   duplicate(alts: object) {
@@ -166,7 +187,15 @@ export class DateTime {
     return this;
   }
 
-  stringifyWith(format: string) {
-    return new DateTimeFormatter().stringify(this, format);
+  stringifyWith(
+    format: string,
+    locale?: string,
+    formatter?: DateTimeFormatter
+  ) {
+    return (formatter ?? new DateTimeFormatter()).stringify(
+      this,
+      format,
+      locale
+    );
   }
 }

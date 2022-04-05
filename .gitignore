@@ -32,3 +32,5 @@ node_modules/
 # don't check in build files
 dist
 /temp/
+
+packages/ferz/README.md

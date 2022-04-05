@@ -1,12 +1,13 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { DateTime } from "ferz";
 import { GregorianCalendar } from "ferz";
 import { PersianCalendar } from "ferz";
 import { DateTimeComponents } from "ferz";
+import { DateTimeFormatter } from "ferz";
 
 describe("DateTime", () => {
   it("should set the calendar passed", () => {
-    const date = new DateTime(null, new PersianCalendar());
+    const date = DateTime.now(new PersianCalendar());
     expect(date.calendar.name).toBe("persian");
   });
 
@@ -20,7 +21,7 @@ describe("DateTime", () => {
 
   it("should set the default calendar", () => {
     DateTime.setDefaultCalendar(new PersianCalendar());
-    expect(new DateTime().calendar.name).toBe("persian");
+    expect(DateTime.now().calendar.name).toBe("persian");
   });
 
   it("should set the time config correctly", () => {
@@ -32,12 +33,20 @@ describe("DateTime", () => {
   });
 
   it("should also accept calendar names as string", () => {
-    expect(new DateTime(null, "persian").calendar.name).toBe("persian");
+    expect(DateTime.now("persian").calendar.name).toBe("persian");
   });
 
   it("should format dates to iso when asked", () => {
     const date = DateTime.fromISO("2017-09-04T19:24:15");
     expect(date.toISO()).toBe("2017-09-04T19:24:15");
+  });
+
+  it("should invoke the formatter class when asked to format", () => {
+    const formatter = new DateTimeFormatter();
+    const spy = vi.spyOn(formatter, "stringify");
+    const date = DateTime.now();
+    date.stringifyWith("yyyy-mm-dd", "fa", formatter);
+    expect(spy).toHaveBeenCalledWith(date, "yyyy-mm-dd", "fa");
   });
 
   it("should call the datetimeparser correctly", () => {
@@ -67,6 +76,14 @@ describe("DateTime", () => {
     const jsNow = new Date();
     const now1 = DateTime.now("gregorian");
     expect(now1.year).toBe(jsNow.getFullYear());
+  });
+
+  it("should use the default calendar when non passed to now()", () => {
+    DateTime.setDefaultCalendar(new GregorianCalendar());
+    const now = DateTime.now();
+    const nowJs = new Date();
+
+    expect(nowJs.valueOf() - now.valueOf()).toBeLessThan(100);
   });
 
   it("should subtract days correctly", () => {

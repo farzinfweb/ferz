@@ -76,7 +76,7 @@ export class DateTimeFormatter {
     }
   }
 
-  stringify(dt: DateTime, format: string, locale?: string): string {
+  public stringify(dt: DateTime, format: string, locale?: string): string {
     this._currentLocale = locale + "-" + dt.calendarName;
     return this.parse(format)
       .map((v) => {
