@@ -1,4 +1,4 @@
-import { Localeable } from "./locales/Localeable";
+import { Localeable } from "@ferz/locales";
 
 let dtconfig = {
   _supportedLocales: {},

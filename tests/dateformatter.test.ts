@@ -3,8 +3,8 @@ import { DateTime } from "ferz";
 import { DateTimeConfiguration } from "ferz";
 import { DateTimeFormatter } from "ferz";
 import { GregorianCalendar } from "ferz";
-import { FaGregorianLocale } from "../packages/ferz/src/locales/FaGregorianLocale";
-import { FaPersianLocale } from "../packages/ferz/src/locales/FaPersianLocale";
+import { FaGregorianLocale } from "@ferz/locales";
+import { FaPersianLocale } from "@ferz/locales";
 
 describe("DateTimeFormatter", () => {
   beforeAll(() => {

@@ -6,6 +6,7 @@ const r = (p: string) => resolve(__dirname, p);
 
 export const alias: AliasOptions = {
   ferz: r("./packages/ferz/src/"),
+  "@ferz/locales": r("./packages/locales/src/"),
 };
 
 export default defineConfig({
