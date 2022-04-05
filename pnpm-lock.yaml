@@ -18,6 +18,15 @@ importers:
       vite: 2.9.1
       vitest: 0.8.4
 
+  packages/ferz:
+    specifiers:
+      '@ferz/locales': workspace:*
+    dependencies:
+      '@ferz/locales': link:../locales
+
+  packages/locales:
+    specifiers: {}
+
 packages:
 
   /@ampproject/remapping/2.1.2:
