@@ -12,3 +12,4 @@ export { Calendar } from "./Calendar";
 export { PersianCalendar } from "./PersianCalendar";
 export { IslamicCalendar } from "./IslamicCalendar";
 export { GregorianCalendar } from "./GregorianCalendar";
+export type { Calendarable } from "./Calendarable";

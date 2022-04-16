@@ -1,0 +1,26 @@
+{
+  "name": "ferz-datepicker",
+  "version": "0.0.0",
+  "main": "dist/main.es.js",
+  "types": "types/main.d.ts",
+  "exports": {
+    ".": "./dist/main.es.js"
+  },
+  "files": [
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "@ferz/datepicker": "link:../../packages/datepicker",
+    "@ferz/locales": "link:../../packages/locales",
+    "ferz": "link:../../packages/ferz"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.3",
+    "vite": "^2.9.1"
+  }
+}

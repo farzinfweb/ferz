@@ -1,0 +1,49 @@
+{
+  "name": "@ferz/datepicker",
+  "version": "0.0.5",
+  "description": "A lightweight full-featured Datepicker based on ferz library",
+  "keywords": [
+    "datepicker",
+    "jalai",
+    "calendar"
+  ],
+  "homepage": "https://github.com/farzinfweb/ferz/tree/main/packages/datepicker#readme",
+  "bugs": {
+    "url": "https://github.com/farzinfweb/ferz/issues"
+  },
+  "license": "MIT",
+  "author": "Farzin Far <farzin.farzanehnia@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farzinfweb/ferz.git",
+    "directory": "packages/datepicker"
+  },
+  "funding": "https://github.com/sponsors/farzinfweb",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "*.d.ts",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "unbuild",
+    "stub": "unbuild --stub"
+  },
+  "dependencies": {
+    "ferz": "workspace:*",
+    "@ferz/locales": "workspace:*"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
