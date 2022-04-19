@@ -1,0 +1,14 @@
+{
+  "name": "@ferz/docs",
+  "private": true,
+  "scripts": {
+    "dev": "vitepress dev --port 3333 --open",
+    "build": "vitepress build",
+    "serve": "vitepress serve"
+  },
+  "devDependencies": {
+    "ferz": "workspace:*",
+    "@ferz/locales": "workspace:*",
+    "vitepress": "^0.22.3"
+  }
+}
