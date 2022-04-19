@@ -1,6 +1,6 @@
 {
   "name": "@ferz/datepicker",
-  "version": "0.0.5",
+  "version": "0.0.1",
   "description": "A lightweight full-featured Datepicker based on ferz library",
   "keywords": [
     "datepicker",

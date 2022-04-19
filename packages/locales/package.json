@@ -1,6 +1,6 @@
 {
   "name": "@ferz/locales",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Calendar locales for ferz library",
   "keywords": [
     "date",
