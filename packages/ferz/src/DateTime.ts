@@ -161,6 +161,24 @@ export class DateTime {
     return this.duplicate({ year: this.year + year });
   }
 
+  addMonths(months: number): DateTime {
+    const newMonth = (this.month + months) % 12;
+    const shouldAddYear = 12 - this.month < months;
+    return this.duplicate({
+      month: newMonth === 0 ? 12 : newMonth,
+      year: shouldAddYear ? this.year + 1 : this.year,
+    });
+  }
+
+  subtractMonths(months: number): DateTime {
+    const newMonth = this.month - months;
+    const shouldSubYear = this.month <= months;
+    return this.duplicate({
+      month: newMonth <= 0 ? 12 + newMonth : newMonth,
+      year: shouldSubYear ? this.year - 1 : this.year,
+    });
+  }
+
   addDays(days: number): DateTime {
     return this.duplicate(this.calendar.fromJd(this._jd + days));
   }

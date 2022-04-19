@@ -16,16 +16,16 @@ export class FaPersianLocale implements Localeable {
     return "ف|ار|خ|ت|مر|ش|مه|آب|آذ|د|ب|اس".split("|");
   }
   weekdaysFull(): string[] {
-    return "یک\u200cشنبه|دوشنبه|سه\u200cشنبه|چهارشنبه|پنج\u200cشنبه|جمعه|شنبه".split(
+    return "دوشنبه|سه\u200cشنبه|چهارشنبه|پنج\u200cشنبه|جمعه|شنبه|یک\u200cشنبه".split(
       "|"
     );
   }
   weekdaysShort(): string[] {
-    return "یک\u200cشنبه|دوشنبه|سه\u200cشنبه|چهارشنبه|پنج\u200cشنبه|جمعه|شنبه".split(
+    return "دوشنبه|سه\u200cشنبه|چهارشنبه|پنج\u200cشنبه|جمعه|شنبه|یک\u200cشنبه".split(
       "|"
     );
   }
   weekdaysNarrow(): string[] {
-    return "ی|د|س|چ|پ|ج|ش".split("|");
+    return "د|س|چ|پ|ج|ش|ی".split("|");
   }
 }
