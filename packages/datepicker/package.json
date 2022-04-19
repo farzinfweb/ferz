@@ -27,12 +27,14 @@
       "require": "./dist/index.cjs",
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./css": "./src/default.css"
   },
   "files": [
     "dist",
     "*.d.ts",
-    "README.md"
+    "README.md",
+    "src/default.css"
   ],
   "sideEffects": false,
   "scripts": {

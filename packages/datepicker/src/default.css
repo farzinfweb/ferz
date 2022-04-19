@@ -1,0 +1,66 @@
+.fdp-container {
+  position: absolute;
+  display: inline-block;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  border-radius: 0.5rem;
+}
+
+.fdp-header {
+  padding: 0.25rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.fdp-body {
+  padding: 0 0.75rem;
+}
+
+.fdp-table th {
+  padding: 8px 0;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.fdp-table th,
+.fdp-table td {
+  text-align: center;
+}
+.fdp-table td {
+}
+
+.fdp-day-button {
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 100%;
+  background-color: transparent;
+  border: 0;
+  font-size: 0.75rem;
+}
+
+.fdp-day-button:hover {
+  background-color: #e2e8f0;
+}
+
+.fdp-arrow {
+  width: 1rem;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.fdp-date-selected {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.fdp-day-button.fdp-date-selected:hover {
+  background-color: #2563eb;
+}
