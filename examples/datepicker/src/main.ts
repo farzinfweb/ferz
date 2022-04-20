@@ -1,6 +1,6 @@
 import DatePicker from "@ferz/datepicker";
 import { FaPersianLocale } from "@ferz/locales";
-import { DateTime, PersianCalendar } from "ferz";
+import { DateTime, PersianCalendar, GregorianCalendar } from "ferz";
 import "@ferz/datepicker/css";
 
 const calendar = new PersianCalendar();
@@ -11,3 +11,7 @@ const datepicker = new DatePicker(
   new FaPersianLocale(),
   { startOfWeek: 6, direction: "rtl" }
 );
+
+datepicker.onSelect((date: DateTime) => {
+  console.log(date.toCalendar(new GregorianCalendar()).toISO());
+});

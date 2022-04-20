@@ -41,6 +41,8 @@ class DatePicker {
     tbody: HTMLTableSectionElement;
   };
 
+  private onSelectCallbacks: Array<(date: DateTime) => any> = [];
+
   constructor(
     element: HTMLInputElement,
     calendar: Calendarable,
@@ -162,21 +164,21 @@ class DatePicker {
   }
 
   private bindListeners(container: HTMLElement) {
-    this.input.onfocus = (e: FocusEvent) => {
+    this.input.addEventListener("focus", (e: FocusEvent) => {
       this.isActive = true;
       container.style.display = "block";
-    };
+    });
 
-    document.onclick = (e: MouseEvent) => {
-      if (!this.isActive) return false;
+    document.addEventListener("click", (e: MouseEvent) => {
+      if (!this.isActive) return;
       const target = e.target as HTMLElement;
       if (!container.contains(target) && !this.input.isEqualNode(target)) {
         this.isActive = false;
         container.style.display = "none";
       }
-    };
+    });
 
-    this.bodyRefs.table.onclick = (e: MouseEvent) => {
+    this.bodyRefs.table.addEventListener("click", (e: MouseEvent) => {
       let target = e.target as HTMLElement;
       if (
         target.classList.contains("fdp-day-button-content") ||
@@ -197,18 +199,21 @@ class DatePicker {
         target.classList.add("fdp-date-selected");
         this.selectedDateButton?.classList.remove("fdp-date-selected");
         this.selectedDateButton = target as HTMLButtonElement;
+        this.onSelectCallbacks.map((cb) => {
+          cb(this.selectedDate as DateTime);
+        });
       }
-    };
+    });
 
-    this.headerRefs.prevButton.onclick = (e: MouseEvent) => {
+    this.headerRefs.prevButton.addEventListener("click", (e: MouseEvent) => {
       this.activeStartOfMonth = this.activeStartOfMonth!.subtractMonths(1);
       this.apply(this.activeStartOfMonth);
-    };
+    });
 
-    this.headerRefs.nextButton.onclick = (e: MouseEvent) => {
+    this.headerRefs.nextButton.addEventListener("click", (e: MouseEvent) => {
       this.activeStartOfMonth = this.activeStartOfMonth!.addMonths(1);
       this.apply(this.activeStartOfMonth);
-    };
+    });
   }
 
   private get isRTL(): boolean {
@@ -265,6 +270,10 @@ class DatePicker {
       this.selectedDate.month === date.month &&
       this.selectedDate.day === day
     );
+  }
+
+  public onSelect(callback: (date: DateTime) => any) {
+    this.onSelectCallbacks.push(callback);
   }
 }
 
