@@ -63,7 +63,7 @@ class DatePicker {
     if (this.options.initialDate) {
       this.selectedDate = this.options.initialDate;
       this.input.value = this.options.initialDate.stringifyWith(
-        "yyyy-MM-dd",
+        this.options.outputFormat as string,
         this.locale.name
       );
     }
@@ -173,8 +173,7 @@ class DatePicker {
       if (!this.isActive) return;
       const target = e.target as HTMLElement;
       if (!container.contains(target) && !this.input.isEqualNode(target)) {
-        this.isActive = false;
-        container.style.display = "none";
+        this.close();
       }
     });
 
@@ -193,12 +192,13 @@ class DatePicker {
           this.calendar
         );
         this.input.value = this.selectedDate.stringifyWith(
-          "yyyy-MM-dd",
+          this.options.outputFormat as string,
           this.locale.name
         );
         target.classList.add("fdp-date-selected");
         this.selectedDateButton?.classList.remove("fdp-date-selected");
         this.selectedDateButton = target as HTMLButtonElement;
+        if (this.options.closeOnSelect) this.close();
         this.onSelectCallbacks.map((cb) => {
           cb(this.selectedDate as DateTime);
         });
@@ -214,6 +214,11 @@ class DatePicker {
       this.activeStartOfMonth = this.activeStartOfMonth!.addMonths(1);
       this.apply(this.activeStartOfMonth);
     });
+  }
+
+  public close() {
+    this.isActive = false;
+    this.refs.container.style.display = "none";
   }
 
   private get isRTL(): boolean {

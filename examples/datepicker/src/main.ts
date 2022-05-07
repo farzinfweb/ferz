@@ -9,7 +9,12 @@ const datepicker = new DatePicker(
   document.querySelector(".basic-test") as HTMLInputElement,
   calendar,
   new FaPersianLocale(),
-  { startOfWeek: 6, direction: "rtl" }
+  {
+    startOfWeek: 6,
+    direction: "rtl",
+    closeOnSelect: true,
+    outputFormat: "yyyy/MM/d",
+  }
 );
 
 datepicker.onSelect((date: DateTime) => {
