@@ -163,6 +163,15 @@ class DatePicker {
     this.bodyRefs.tbody = newBody;
   }
 
+  public setDate(date: DateTime) {
+    this.selectedDate = date;
+    this.input.value = date.stringifyWith(
+      this.options.outputFormat as string,
+      this.locale.name
+    );
+    this.apply(date.startOf("month"));
+  }
+
   private bindListeners(container: HTMLElement) {
     this.input.addEventListener("focus", (e: FocusEvent) => {
       this.isActive = true;
