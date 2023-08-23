@@ -12,7 +12,11 @@
     "skipDefaultLibCheck": true,
     "paths": {
       "ferz": ["./packages/ferz/src/index.ts"],
-      "@ferz/locales": ["./packages/locales/src/index.ts"],
+      "@ferz/gregorian-calendar": [
+        "./packages/calendars-gregorian/src/index.ts"
+      ],
+      "@ferz/persian-calendar": ["./packages/calendars-persian/src/index.ts"],
+      "@ferz/islamic-calendar": ["./packages/calendars-islamic/src/index.ts"],
       "@ferz/datepicker": ["./packages/datepicker/src/index.ts"]
     }
   },

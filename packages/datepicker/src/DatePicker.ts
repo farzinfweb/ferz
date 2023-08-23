@@ -1,6 +1,5 @@
 import { Calendarable, DateTimeConfiguration } from "ferz";
-import { DateTime } from "ferz";
-import { Localeable } from "@ferz/locales";
+import { DateTime, type Localeable } from "ferz";
 import { DatePickerOptions, DatePickerDefaults } from "./DatePickerOptions";
 
 class DatePicker {

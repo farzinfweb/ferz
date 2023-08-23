@@ -1,7 +1,7 @@
-import type { Calendarable } from "./Calendarable";
-import { DateTimeComponents } from "./DateTimeComponents";
+import { type Calendarable } from "../../shared/src/Calendarable";
+import { DateTimeComponents } from "../../shared/src/DateTimeComponents";
 
-export class PersianCalendar implements Calendarable {
+export default class PersianCalendar implements Calendarable {
   public name: string = "persian";
   static PERSIAN_EPOCH = 1948320.5;
 

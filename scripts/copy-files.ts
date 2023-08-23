@@ -1,9 +1,11 @@
-const fs = require("fs");
-const path = require("path");
+import { copyFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 // relative to scripts directory
 const destinations = [["../README.md", "../packages/ferz/README.md"]];
 
+const _filename = fileURLToPath(import.meta.url);
 destinations.forEach(([src, dest]) => {
-  fs.copyFileSync(path.resolve(__dirname, src), path.resolve(__dirname, dest));
+  copyFileSync(resolve(_filename, "..", src), resolve(_filename, "..", dest));
 });

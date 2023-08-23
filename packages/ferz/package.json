@@ -1,6 +1,6 @@
 {
   "name": "ferz",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A library for working with dates and calendars in JS",
   "keywords": [
     "date",
@@ -27,11 +27,6 @@
       "require": "./dist/index.cjs",
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
-    },
-    "./locales": {
-      "require": "./dist/locales.cjs",
-      "import": "./dist/locales.mjs",
-      "types": "./dist/locales.d.ts"
     }
   },
   "files": [
@@ -45,9 +40,12 @@
     "stub": "unbuild --stub"
   },
   "dependencies": {
-    "@ferz/locales": "workspace:*"
+    "@ferz/gregorian-calendar": "workspace:*"
+  },
+  "devDependencies": {
+    "@ferz/shared": "workspace:*"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   }
 }

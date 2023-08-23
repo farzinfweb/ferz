@@ -1,4 +1,4 @@
-import { DateTimeComponents } from "./DateTimeComponents";
+import { DateTimeComponents } from "../../shared/src/DateTimeComponents";
 
 export class DateTimeParser {
   constructor() {}

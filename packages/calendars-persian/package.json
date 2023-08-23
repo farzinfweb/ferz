@@ -1,13 +1,15 @@
 {
-  "name": "@ferz/datepicker",
-  "version": "0.0.5",
-  "description": "A lightweight full-featured Datepicker based on ferz library",
+  "name": "@ferz/persian-calendar",
+  "version": "0.0.2",
+  "description": "The persian calendar for ferz library",
   "keywords": [
-    "datepicker",
-    "jalai",
-    "calendar"
+    "date",
+    "immutable",
+    "calendar",
+    "persian",
+    "jalali"
   ],
-  "homepage": "https://github.com/farzinfweb/ferz/tree/main/packages/datepicker#readme",
+  "homepage": "https://github.com/farzinfweb/ferz/tree/main/packages/calendars-persian#readme",
   "bugs": {
     "url": "https://github.com/farzinfweb/ferz/issues"
   },
@@ -16,7 +18,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/farzinfweb/ferz.git",
-    "directory": "packages/datepicker"
+    "directory": "packages/ferz"
   },
   "funding": "https://github.com/sponsors/farzinfweb",
   "main": "dist/index.cjs",
@@ -28,21 +30,24 @@
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
     },
-    "./css": "./src/default.css"
+    "./locales/*": {
+      "types": "./locales/*.d.ts",
+      "import": "./locales/*.mjs"
+    }
   },
   "files": [
     "dist",
+    "locales",
     "*.d.ts",
-    "README.md",
-    "src/default.css"
+    "README.md"
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "unbuild",
+    "build": "rimraf -g locales && unbuild",
     "stub": "unbuild --stub"
   },
-  "dependencies": {
-    "ferz": "workspace:*"
+  "devDependencies": {
+    "@ferz/shared": "workspace:*"
   },
   "engines": {
     "node": ">=16"

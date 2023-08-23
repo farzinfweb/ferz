@@ -16,11 +16,12 @@
   },
   "dependencies": {
     "@ferz/datepicker": "link:../../packages/datepicker",
-    "@ferz/locales": "link:../../packages/locales",
+    "@ferz/gregorian-calendar": "link:../../packages/calendars-gregorian",
+    "@ferz/persian-calendar": "link:../../packages/calendars-persian",
     "ferz": "link:../../packages/ferz"
   },
   "devDependencies": {
-    "typescript": "^4.6.3",
-    "vite": "^2.9.1"
+    "typescript": "^5.0.0",
+    "vite": "^4.4.9"
   }
 }

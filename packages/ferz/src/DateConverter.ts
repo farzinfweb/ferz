@@ -1,6 +1,6 @@
-import type { Calendarable } from "./Calendarable";
+import type { Calendarable } from "../../shared/src/Calendarable";
 import type { DateTime } from "./DateTime";
-import { DateTimeComponents } from "./DateTimeComponents";
+import { DateTimeComponents } from "../../shared/src/DateTimeComponents";
 
 export class DateConverter {
   protected _date: DateTime;

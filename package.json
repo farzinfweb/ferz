@@ -2,18 +2,19 @@
   "name": "ferz-monorepo",
   "version": "0.0.6",
   "private": true,
-  "packageManager": "pnpm@7.0.0",
+  "packageManager": "pnpm@8.6.12",
   "scripts": {
     "test": "vitest",
-    "build": "rimraf packages/*/dist && node scripts/copy-files.ts && pnpm -r run build && pnpm -r run build-post",
+    "build": "rimraf -g packages/*/dist && tsx scripts/copy-files.ts && pnpm -r --filter=./packages/* run build && pnpm -r run build-post",
     "stub": "pnpm -r --parallel run stub"
   },
   "devDependencies": {
-    "rimraf": "^3.0.2",
-    "rollup": "^2.70.1",
-    "typescript": "^4.5.4",
-    "unbuild": "^0.7.2",
-    "vite": "^2.9.0",
-    "vitest": "^0.8.4"
+    "rimraf": "^5.0.1",
+    "rollup": "^3.28.0",
+    "tsx": "^3.12.7",
+    "typescript": "^5.0.0",
+    "unbuild": "^1.2.1",
+    "vite": "^4.4.9",
+    "vitest": "^0.34.0"
   }
 }

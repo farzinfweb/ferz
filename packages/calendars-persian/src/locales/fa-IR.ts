@@ -1,31 +1,30 @@
-import { Localeable } from "./Localeable";
+import { type Localeable } from "../../../shared/src/Localeable";
 
-export class FaPersianLocale implements Localeable {
-  name: string = "fa";
-  forCalendar = "persian";
-
-  monthNamesFull(): string[] {
+export default {
+  name: "fa",
+  forCalendar: "persian",
+  monthNamesFull: () => {
     return "فروردین|اردیبهشت|خرداد|تیر|مرداد|شهریور|مهر|آبان|آذر|دی|بهمن|اسفند".split(
       "|"
     );
-  }
-  monthNamesShort(): string[] {
+  },
+  monthNamesShort: () => {
     return "فرو|ارد|خرد|تیر|مرد|شهر|مهر|آبا|آذر|دی|بهم|اسف".split("|");
-  }
-  monthNamesNarrow(): string[] {
+  },
+  monthNamesNarrow: () => {
     return "ف|ار|خ|ت|مر|ش|مه|آب|آذ|د|ب|اس".split("|");
-  }
-  weekdaysFull(): string[] {
+  },
+  weekdaysFull: () => {
     return "دوشنبه|سه\u200cشنبه|چهارشنبه|پنج\u200cشنبه|جمعه|شنبه|یک\u200cشنبه".split(
       "|"
     );
-  }
-  weekdaysShort(): string[] {
+  },
+  weekdaysShort: () => {
     return "دوشنبه|سه\u200cشنبه|چهارشنبه|پنج\u200cشنبه|جمعه|شنبه|یک\u200cشنبه".split(
       "|"
     );
-  }
-  weekdaysNarrow(): string[] {
+  },
+  weekdaysNarrow: () => {
     return "د|س|چ|پ|ج|ش|ی".split("|");
-  }
-}
+  },
+} satisfies Localeable;

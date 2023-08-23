@@ -1,29 +1,29 @@
-import { Localeable } from "./Localeable";
+import { type Localeable } from "../../../shared/src/Localeable";
 
-export class FaGregorianLocale implements Localeable {
-  name: string = "fa";
-  forCalendar = "gregorian";
+export default {
+  name: "fa",
+  forCalendar: "gregorian",
 
-  monthNamesFull(): string[] {
+  monthNamesFull: () => {
     return "ژانویه|فوریه|مارس|آوریل|مه|ژوئن|ژوئیه|اوت|سپتامبر|اکتبر|نوامبر|دسامبر".split(
       "|"
     );
-  }
-  monthNamesShort(): string[] {
+  },
+  monthNamesShort: () => {
     return "ژان|فور|مار|آور|مه|ژوئن|ژوئیه|اوت|سپت|اکت|نوا|دسا".split("|");
-  }
-  monthNamesNarrow(): string[] {
+  },
+  monthNamesNarrow: () => {
     return "ژ|ف|م|آ|مه|ژو|ژو|او|س|اک|ن|د".split("|");
-  }
-  weekdaysFull(): string[] {
+  },
+  weekdaysFull: () => {
     return "دوشنبه|سه\u200cشنبه|چهارشنبه|پنج\u200cشنبه|جمعه|شنبه|یک\u200cشنبه".split(
       "|"
     );
-  }
-  weekdaysShort(): string[] {
+  },
+  weekdaysShort: () => {
     return "دو|سه|چهار|پنج|جمعه|شنبه|یک".split("|");
-  }
-  weekdaysNarrow(): string[] {
+  },
+  weekdaysNarrow: () => {
     return "د|س|چ|پ|ج|ش|ی".split("|");
-  }
-}
+  },
+} satisfies Localeable;

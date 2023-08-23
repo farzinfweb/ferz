@@ -1,9 +1,8 @@
-import { GregorianCalendar } from "./GregorianCalendar";
-import { Calendar } from "./Calendar";
-import type { Calendarable } from "./Calendarable";
-import { EmptyCalendar } from "./Calendarable";
+import GregorianCalendar from "@ferz/gregorian-calendar";
+import type { Calendarable } from "../../shared/src/Calendarable";
+import { EmptyCalendar } from "./Calendar";
 import { DateConverter } from "./DateConverter";
-import { DateTimeComponents } from "./DateTimeComponents";
+import { DateTimeComponents } from "../../shared/src/DateTimeComponents";
 import { DateTimeFormatter } from "./DateTimeFormatter";
 import { DateTimeParser } from "./DateTimeParser";
 
@@ -28,10 +27,9 @@ export class DateTime {
 
   constructor(
     components: DateTimeComponents,
-    calendar?: Calendarable | string,
+    calendar?: Calendarable,
     jsDate?: Date
   ) {
-    if (typeof calendar === "string") calendar = Calendar.fromName(calendar);
     this._calendar = calendar ?? this.useDefaultCalendar();
     this._components = components;
     this._jd = this._calendar.toJd(this._components);
@@ -58,7 +56,7 @@ export class DateTime {
     return new DateTime(DateTimeComponents.fromObj(config), calendar);
   }
 
-  static fromISO(iso: string, calendar?: Calendarable | string): DateTime {
+  static fromISO(iso: string, calendar?: Calendarable): DateTime {
     return new DateTime(new DateTimeParser().fromISO(iso), calendar);
   }
 
@@ -74,8 +72,7 @@ export class DateTime {
     defaultCalendar = calendar;
   }
 
-  static now(calendar?: Calendarable | string) {
-    if (typeof calendar === "string") calendar = Calendar.fromName(calendar);
+  static now(calendar?: Calendarable) {
     calendar = calendar ?? defaultCalendar;
     const now = new Date();
     const gregorianComponents = DateTimeComponents.fromJSDate(now);

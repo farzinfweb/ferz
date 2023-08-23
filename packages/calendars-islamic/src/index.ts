@@ -1,5 +1,5 @@
-import type { Calendarable } from "./Calendarable";
-import { DateTimeComponents } from "./DateTimeComponents";
+import { type Calendarable } from "../../shared/src/Calendarable";
+import { DateTimeComponents } from "../../shared/src/DateTimeComponents";
 
 export class IslamicCalendar implements Calendarable {
   public name: string = "islamic";

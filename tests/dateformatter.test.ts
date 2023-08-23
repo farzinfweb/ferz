@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll } from "vitest";
 import { DateTime } from "ferz";
 import { DateTimeConfiguration } from "ferz";
 import { DateTimeFormatter } from "ferz";
-import { GregorianCalendar } from "ferz";
+import GregorianCalendar from "@ferz/gregorian-calendar";
 import { FaGregorianLocale } from "@ferz/locales";
 import { FaPersianLocale } from "@ferz/locales";
 

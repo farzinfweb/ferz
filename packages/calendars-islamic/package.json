@@ -1,13 +1,15 @@
 {
-  "name": "@ferz/locales",
-  "version": "0.0.6",
-  "description": "Calendar locales for ferz library",
+  "name": "@ferz/islamic-calendar",
+  "version": "0.0.2",
+  "description": "The islamic calendar for ferz library",
   "keywords": [
     "date",
     "immutable",
-    "calendar"
+    "calendar",
+    "islamic",
+    "hijri"
   ],
-  "homepage": "https://github.com/farzinfweb/ferz/tree/main/packages/ferz#readme",
+  "homepage": "https://github.com/farzinfweb/ferz/tree/main/packages/calendars-islamic#readme",
   "bugs": {
     "url": "https://github.com/farzinfweb/ferz/issues"
   },
@@ -39,7 +41,10 @@
     "build": "unbuild",
     "stub": "unbuild --stub"
   },
+  "devDependencies": {
+    "@ferz/shared": "workspace:*"
+  },
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   }
 }
